@@ -1,0 +1,21 @@
+{
+  "name": "baohan/request",
+  "description": "A helper to validate and build query criteria for MongoDB.",
+  "require": {
+    "php": "^5.5.9",
+    "baohan/Collection": "1.0.*"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "baohan",
+      "email": "baohanddd@gmail.com",
+      "homepage": "https://twitter.com/baohanddd"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "baohan\\Request\\": "src/"
+    }
+  }
+}
