@@ -2,15 +2,17 @@
 namespace baohan\Request\Query;
 
 
+use baohan\Collection\Collection;
+
 class Builder
 {
     /**
-     * @var array
+     * @var Collection
      */
     private $params;
 
     /**
-     * @var array
+     * @var Collection
      */
     private $ret;
 
@@ -19,7 +21,7 @@ class Builder
      */
     private $key;
 
-    public function __construct(array &$params, array &$result, $key)
+    public function __construct(Collection &$params, Collection &$result, $key)
     {
         $this->params = $params;
         $this->key    = $key;

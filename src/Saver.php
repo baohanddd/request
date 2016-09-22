@@ -1,33 +1,38 @@
 <?php
 namespace baohan\Request;
 
+use baohan\Collection\Collection;
 use baohan\Request\Saver\Builder;
 
 class Saver
 {
+    /**
+     * @var Collection
+     */
+    private $data;
 
     /**
-     * @var array
+     * @var Collection
      */
-    private $data = [];
+    private $result;
 
-    /**
-     * @var array
-     */
-    private $result = [];
-
-    public function __construct(array $data)
+    public function __construct(Collection $data)
     {
         $this->data = $data;
+        $this->result = new Collection();
     }
 
+    /**
+     * @param $key
+     * @return Builder
+     */
     public function param($key)
     {
         return new Builder($this->data, $this->result, $key);
     }
 
     /**
-     * @return array
+     * @return Collection
      */
     public function getResult()
     {
