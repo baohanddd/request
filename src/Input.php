@@ -32,7 +32,7 @@ class Input
     /**
      * @param array $enum
      * @return $this
-     * @throws Exception
+     * @throws \Exception
      */
     public function chkIn(array $enum)
     {
@@ -40,31 +40,31 @@ class Input
         $val = $this->params[$this->key];
         if(isset($this->ret[$this->key])) $val = $this->ret[$this->key];
         if(!in_array($val, $enum))
-            throw new Exception(sprintf('The %s is not in [%s]', $val, implode(', ', $enum)), 4101);
+            throw new \Exception(sprintf('The %s is not in [%s]', $val, implode(', ', $enum)), 4101);
         return $this;
     }
 
     /**
      * @return $this
-     * @throws Exception
+     * @throws \Exception
      */
     public function chkJson()
     {
         if($this->null()) return $this;
         json_decode($this->params[$this->key]);
         if(json_last_error() != JSON_ERROR_NONE)
-            throw new Exception(sprintf('The `%s` is invalid JSON string', $this->key), 4102);
+            throw new \Exception(sprintf('The `%s` is invalid JSON string', $this->key), 4102);
         return $this;
     }
 
     /**
      * @return $this
-     * @throws Exception
+     * @throws \Exception
      */
     public function chkRequire()
     {
         if(!isset($this->params[$this->key])) {
-            throw new Exception(sprintf('The %s must supplied', $this->key), 4103);
+            throw new \Exception(sprintf('The %s must supplied', $this->key), 4103);
         }
         return $this;
     }
@@ -78,7 +78,7 @@ class Input
         $key = $this->key;
         $check = function($id) use ($key) {
             if(!preg_match('/^[0-9a-fA-F]{24}$/', $id))
-                throw new Exception(sprintf('The "%s" is invalid formation of mongo id', $key), 4104);
+                throw new \Exception(sprintf('The "%s" is invalid formation of mongo id', $key), 4104);
         };
 
         if($this->null()) return $this;
@@ -98,7 +98,7 @@ class Input
 
     /**
      * @return $this
-     * @throws Exception
+     * @throws \Exception
      */
     public function chkTimestamp()
     {
@@ -106,7 +106,7 @@ class Input
         $val = $this->params[$this->key];
         $len = strlen((string) $val);
         if($len != 10 || !is_numeric($val))
-            throw new Exception(sprintf('The `%s` is invalid timestamp', $this->key), 4105);
+            throw new \Exception(sprintf('The `%s` is invalid timestamp', $this->key), 4105);
 
         return $this;
     }
@@ -114,12 +114,12 @@ class Input
     /**
      * @param $key
      * @return $this
-     * @throws Exception
+     * @throws \Exception
      */
     public function chkRelated($key)
     {
         if(!isset($this->params[$key])) {
-            throw new Exception(sprintf('The %s must supplied', $key), 4103);
+            throw new \Exception(sprintf('The %s must supplied', $key), 4103);
         }
         return $this;
     }
@@ -128,12 +128,12 @@ class Input
      * @param $one
      * @param $another
      * @return $this
-     * @throws Exception
+     * @throws \Exception
      */
     public function chkAlternative($one, $another)
     {
         if(!isset($this->params[$one]) && !isset($this->params[$another])) {
-            throw new Exception(sprintf('one of %s and %s must supplied', $one, $another), 4103);
+            throw new \Exception(sprintf('one of %s and %s must supplied', $one, $another), 4103);
         }
         return $this;
     }
